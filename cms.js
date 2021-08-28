@@ -138,3 +138,40 @@ function deptNew() {
         createCmsData();
       });
   }
+
+  // Show lists
+function deptListShow() {
+    console.log(" ");
+    connection.query(
+      "SELECT id, name AS department FROM department",
+      function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        createCmsData();
+      }
+    );
+  }
+  
+  function roleList() {
+    console.log(" ");
+    connection.query(
+      "SELECT id, title, salary, department_id AS role FROM role",
+      function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        createCmsData();
+      }
+    );
+  }
+  function empList() {
+    console.log(" ");
+    connection.query(
+      "SELECT id, first_name, last_name, role_id, manager_id AS employee FROM employee",
+      function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        createCmsData();
+      }
+    );
+  }
+  
