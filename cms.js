@@ -13,3 +13,40 @@ const connection = mysql.createConnection({
   database: "cms_db",
 });
 
+// User prompts begin
+function userPrompt() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          message: "What would you like to do?",
+          name: "choice",
+          choices: [
+            "Add Department",
+            "Add Role",
+            "Add Employee",
+            "List Employees",
+            "List Roles",
+            "List Departments",
+            "Update An Employee's Role",
+          ],
+        },
+      ])
+      .then(function (fillTable) {
+        if (fillTable.choice === "Add Department") {
+          deptNew();
+        } else if (fillTable.choice === "Add Role") {
+          roleCreate();
+        } else if (fillTable.choice === "Add Employee") {
+          newAddEmp();
+        } else if (fillTable.choice === "List Employees") {
+          empList();
+        } else if (fillTable.choice === "List Roles") {
+          roleList();
+        } else if (fillTable.choice === "List departments") {
+          deptListShow();
+        } else {
+          empRoleChange();
+        }
+      });
+  }
