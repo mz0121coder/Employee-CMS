@@ -50,3 +50,91 @@ function userPrompt() {
         }
       });
   }
+
+  // Add departments, roles & employees
+function deptNew() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter name of department",
+          name: "deptAdd",
+        },
+      ])
+      .then(function (depRecent) {
+        connection.query(
+          "INSERT INTO department SET ?",
+          {
+            name: depRecent.deptAdd,
+          },
+          function (err, res) {
+            if (err) throw err;
+            createCmsData();
+          }
+        );
+      });
+  }
+  
+  function roleCreate() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter title of role",
+          name: "plusRoleName",
+        },
+        {
+          type: "input",
+          message: "Enter salary of role",
+          name: "plusSalary",
+        },
+        {
+          type: "input",
+          message: "Enter ID of role",
+          name: "plusId",
+        },
+      ])
+      .then(function (newRole) {
+        connection.query("INSERT INTO role SET ?", {
+          title: newRole.plusRoleName,
+          salary: newRole.plusSalary,
+          department_id: newRole.plusId,
+        });
+        createCmsData();
+      });
+  }
+  
+  function newAddEmp() {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          message: "Enter first name of employee",
+          name: "firstNameEmp",
+        },
+        {
+          type: "input",
+          message: "Enter last name of employee",
+          name: "lastNameEmp",
+        },
+        {
+          type: "input",
+          message: "Enter role ID of employee",
+          name: "IdRole",
+        },
+        {
+          type: "input",
+          message: "Enter role manager ID of employee",
+          name: "IdManagerEmp",
+        },
+      ])
+      .then(function (recentAdd) {
+        connection.query("INSERT INTO employee SET ?", {
+          first_name: recentAdd.firstNameEmp,
+          last_name: recentAdd.lastNameEmp,
+          role_id: recentAdd.IdRole,
+          manager_id: recentAdd.IdManagerEmp,
+        });
+        createCmsData();
+      });
+  }
