@@ -203,3 +203,35 @@ function empRoleChange() {
       });
   }
   
+  // Continue + finalise CMS tracker
+function createCmsData() {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          name: "Continue creating CMS?",
+          name: "promptResume",
+          choices: ["YES", "NO"],
+        },
+      ])
+      .then(function (recentResponse) {
+        if (recentResponse.promptResume === "YES") {
+          userPrompt();
+        } else {
+          console.log("CMS completed");
+          connection.end();
+        }
+      });
+  }
+  
+  userPrompt();
+  connection.connect(function (err) {
+    if (err) console.log("not connected", err);
+    else console.log("connection succesful");
+  
+    connection.query("SELECT * FROM department", function (err, result) {
+      if (err) console.log("error", err);
+      else console.log("successful");
+    });
+  });
+  
