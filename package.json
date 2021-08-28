@@ -1,0 +1,26 @@
+{
+  "name": "employee-cms",
+  "version": "1.0.0",
+  "description": "MySQL database to track employees",
+  "main": "cms.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mz0121coder/Employee-CMS.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mz0121coder/Employee-CMS/issues"
+  },
+  "homepage": "https://github.com/mz0121coder/Employee-CMS#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.17.1",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1",
+    "sequelize": "^6.3.5"
+  }
+}
