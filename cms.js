@@ -174,4 +174,32 @@ function deptListShow() {
       }
     );
   }
+
+  // Update entries
+function empRoleChange() {
+    inquirer
+      .prompt([
+        {
+          message:
+            "Enter first name of employee whose role has changed",
+          type: "input",
+          name: "name",
+        },
+        {
+          message: "enter ID of new role",
+          type: "number",
+          name: "role_id",
+        },
+      ])
+      .then(function (response) {
+        connection.query(
+          "UPDATE employee SET role_id = role_id WHERE first_name = name",
+          [response.role_id, response.name],
+          function (err, data) {
+            console.table(response);
+          }
+        );
+        createCmsData();
+      });
+  }
   
