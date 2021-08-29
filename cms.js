@@ -27,7 +27,6 @@ function userPrompt() {
             "Add Employee",
             "List Employees",
             "List Roles",
-            "List Departments",
             "Update An Employee's Role",
           ],
         },
@@ -43,8 +42,6 @@ function userPrompt() {
           empList();
         } else if (fillTable.choice === "List Roles") {
           roleList();
-        } else if (fillTable.choice === "List departments") {
-          deptListShow();
         } else {
           empRoleChange();
         }
@@ -191,12 +188,12 @@ function empRoleChange() {
           name: "role_id",
         },
       ])
-      .then(function (response) {
+      .then(function (choice) {
         connection.query(
           "UPDATE employee SET role_id = role_id WHERE first_name = name",
-          [response.role_id, response.name],
+          [choice.role_id, choice.name],
           function (err, data) {
-            console.table(response);
+            console.table(choice);
           }
         );
         createCmsData();
@@ -210,12 +207,12 @@ function createCmsData() {
         {
           type: "list",
           name: "Continue creating CMS?",
-          name: "promptResume",
+          name: "continue",
           choices: ["YES", "NO"],
         },
       ])
       .then(function (recentResponse) {
-        if (recentResponse.promptResume === "YES") {
+        if (recentResponse.continue === "YES") {
           userPrompt();
         } else {
           console.log("CMS completed");
@@ -227,11 +224,11 @@ function createCmsData() {
   userPrompt();
   connection.connect(function (err) {
     if (err) console.log("not connected", err);
-    else console.log("connection succesful");
+    else console.log("");
   
     connection.query("SELECT * FROM department", function (err, result) {
-      if (err) console.log("error", err);
-      else console.log("successful");
+      if (err) console.log("not connected", err);
+      else console.log("");
     });
   });
   
